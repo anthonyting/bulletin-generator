@@ -1,0 +1,18 @@
+# dev environment
+.jshintrc
+build.ps1
+build-dev.ps1
+.vscode
+
+# python files
+venv/
+__pycache__/
+
+# other
+sites-available.txt
+tests/*
+develop-scripts/*.jar
+output/
+static/favicons/*
+static/css/*
+static/scripts/*

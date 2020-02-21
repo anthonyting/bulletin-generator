@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+}
+
+#prayers input[type=text] {
+    margin: 10px 0 10px 0;
+}
+
+#schedules {
+    padding: 20px 0 20px 0;
+}
+
+#scriptures {
+    padding: 20px 0 20px 0;
+    text-align: center;
+}
+
+#scriptures input[type=text] {
+    width: 17%;
+}
+
+table {
+    margin: 0 auto;
+    margin-top: 10px;
+    background-color: #dedede;
+    text-align: center;
+}
+
+tr.title th {
+    cursor: move;
+    font-size: 25px;
+}
+
+th.over {
+    box-shadow:inset 0px 0px 0px 2px #000;
+}
+
+tr {
+    outline: thin solid;
+}
+
+tr span {
+    margin: 0 15px 0 15px;
+}
+
+td span input[type=text] {
+    text-align: center;
+    margin: 5px 5px 5px 5px;
+    padding: 10px 10px 10px 10px;
+    width: 80%;
+}
+
+#box textarea {
+    height: 100px;
+}

@@ -1,0 +1,26 @@
+@media screen and (max-width: 700px) {
+
+    .group {
+        width: 75vw;
+    }
+
+    #bulletin_form {
+        width: 95%;
+    }
+
+    #scriptures input[type=text] {
+        width: 25%;
+    }
+
+    li {
+        width: 100%;
+    }
+
+    .add-row {
+        margin-bottom: 10px;
+    }
+    
+    .delete-row {
+        position: static;
+    }
+}

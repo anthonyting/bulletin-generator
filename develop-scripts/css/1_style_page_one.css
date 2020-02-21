@@ -1,0 +1,155 @@
+* {
+    box-sizing: border-box;
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.upload_download {
+    display: block;
+    text-align: center;
+    font-size: 12pt;
+    font-weight: bold;
+    padding: 10px 0 10px 0px;
+}
+
+.upload_download input {
+    font-size: 12pt;
+}
+
+.upload_download span {
+    white-space: nowrap;
+    padding: 5px 5px 5px 5px;
+}
+
+.nextPrev {
+    text-align: center;
+    padding: 10px 0 10px 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+input[type=checkbox] {
+    transform: scale(1.5);
+}
+
+.invalid {
+    background-color: #ffdddd;
+}
+
+.page {
+    display: none;
+    padding: 10px 10px 10px 10px;
+}
+
+header {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;  
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+.step.active {
+    opacity: 1;
+}
+
+label {
+    padding: 12px 12px 12px 0px;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+#bulletin_form {
+    width: 65%;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: #eeeeee;
+    padding: 20px;
+}
+
+.group {
+    width: 85%;
+    padding: 12px 0 12px 0;
+    margin: 0 auto;
+}
+
+.group#choir, .group#holy_communion {
+    display: none
+}
+
+div span.second_entry {
+    display: block;
+    padding-top: 5px;
+}
+
+.steps {
+    text-align: center;
+    margin-top: 15px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.steps .step {
+    cursor: pointer;
+}
+
+button {
+    color: #ffffff;
+    border: none;
+    padding: 15px 30px;
+    cursor: pointer;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 12pt;
+    font-weight:bold;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.reset {
+    margin: 10px 0;
+	background-color:#f24537;
+	padding:6px 24px;
+}
+
+.prevBtn {
+    margin: 5px 0;
+    background-color: #537d54;
+}
+
+.nextBtn {
+    margin: 5px 0;
+    background-color: #4CAF50;
+}
+
+select {
+    height: 40px;
+}

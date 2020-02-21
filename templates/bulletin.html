@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" content="Create a bulletin">
+    <meta charset="UTF-8">
+    <title>Bulletin</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicons/favicon.ico') }}">
+	<link rel="icon" sizes="16x16 32x32 64x64" href="{{ url_for('static', filename='favicons/favicon.ico') }}">
+	<link rel="icon" type="image/png" sizes="196x196" href="{{ url_for('static', filename='favicons/favicon-192.png') }}">
+	<link rel="icon" type="image/png" sizes="160x160" href="{{ url_for('static', filename='favicons/favicon-160.png') }}">
+	<link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='favicons/favicon-96.png') }}">
+	<link rel="icon" type="image/png" sizes="64x64" href="{{ url_for('static', filename='favicons/favicon-64.png') }}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicons/favicon-32.png') }}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicons/favicon-16.png') }}">
+	<link rel="apple-touch-icon" href="{{ url_for('static', filename='favicons/favicon-57.png') }}">
+	<link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='favicons/favicon-114.png') }}">
+	<link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='favicons/favicon-72.png') }}">
+	<link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='favicons/favicon-144.png') }}">
+	<link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='favicons/favicon-60.png') }}">
+	<link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='favicons/favicon-120.png') }}">
+	<link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='favicons/favicon-76.png') }}">
+	<link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='favicons/favicon-152.png') }}">
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicons/favicon-180.png') }}">
+	<meta name="msapplication-TileColor" content="#FFFFFF">
+	<meta name="msapplication-TileImage" content="{{ url_for('static', filename='favicons/favicon-144.png') }}">
+    <meta name="msapplication-config" content="{{ url_for('static', filename='favicons/browserconfig.xml') }}">
+    
+    <script src="{{ url_for('static', filename='scripts/scripts.js') }}" async defer></script>
+
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+</head>
+
+<body>
+<form name="bulletin_form" action="" id="bulletin_form" method="post">
+    {{ pageOne["date"].csrf_token() }}
+
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+        {% if category=="error" %}
+            <p class="{{ category }}">{{ message }}</p>
+        {% endif %}
+    {% endfor %}
+
+    <div class="upload_download">
+        <span>Save Inputs to File: {{ downloadForm.download }}</span>
+        <span>Upload Inputs: <input type="file" id="file"/></span>
+        <span><button type="button" title="Clears Inputs on Every Page" class="reset" onclick="clearInputs('Are you sure you want to clear ALL pages?')">Clear All Pages</button></span>
+        <span><button type="button" title="Clears Inputs on Current Page" class="reset" onclick="clearPageInputs('page' + currentPage, 'Are you sure you want to clear this page?')">Clear This Page</button></span>
+    </div>
+    <div class="steps">
+        <span class="step" title="Page 1" onclick=showPage(0)></span>
+        <span class="step" title="Page 2" onclick=showPage(1)></span>
+        <span class="step" title="Page 3" onclick=showPage(2)></span>
+    </div>
+    <div class="nextPrev">
+        <button type="button" title="Previous Page" class="prevBtn" onclick="nextPrev(-1)" style="visibility: hidden;">Prev</button>
+        <button type="button" title="Next Page" class="nextBtn" onclick="nextPrev(1)">Next</button>
+    </div>
+    <div class="page" id="page0" style="display: block;">
+
+        <header>Order Of Worship</header>
+
+        {% for field in pageOne["date"] if field.name != "csrf_token" %}
+            <div id = "{{field.name}}F" class="group">
+                <span class="name">
+                    <b>{{ field.label }}</b>
+                </span>
+                <span class="entry">
+                    {{ field }}
+                    {% for error in field.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </span>
+            </div>
+        {% endfor %}
+
+        {% for field in pageOne["front_title"] if field.name != "csrf_token" %}
+        <div id = "{{field.name}}F" class="group">
+            <span class="name">
+                <b>{{ field.label }}</b>
+            </span>
+            <span class="entry">
+                {{ field }}
+                {% for error in field.errors %}
+                    {{ error }}
+                {% endfor %}
+            </span>
+        </div>
+        {% endfor %}
+
+        {% for field in pageOne["order_of_worship_title"] if field.name != "csrf_token" %}
+            <div id = "{{field.name}}F" class="group">
+                <span class="name">
+                    <b>{{ field.label }}</b>
+                </span>
+                <span class="entry">
+                    {{ field }}
+                    {% for error in field.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </span>
+            </div>
+        {% endfor %}
+
+        {% for field in pageOne["boolForms"] if field.name != "csrf_token" %}
+            <div class="group" onchange="{{field.name}}()">
+                <span class="name">
+                        <b>{{ field.label }}</b>
+                    </span>
+                    <span class="checkboxEntry">
+                        {{ field }}
+                        {% for error in field.errors %}
+                            {{ error }}
+                        {% endfor %}
+                </span>
+            </div>
+        {% endfor %}
+
+        {% for name,formList in pageOne["order_of_worship"].items() %} 
+            <div id="{{name}}F" class="group">
+                {% for field in formList if field.name != "csrf_token" %}
+                    {% if "E" not in field.label() %}
+                        <span class="name">
+                            <b>{{ field.label }}</b>
+                        </span>
+                        <span class="first_entry">
+                            {{ field }}
+                            {% for error in field.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </span>
+                    {% else %}
+                        <span class="second_entry">
+                            {{ field }}
+                            {% for error in field.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="page" id="page1" >
+        <header>家事分享 Announcements</header>
+        <div id="rows">
+            <ol>
+                {% for announcementField in pageTwo if announcementField.name != csrf_token %}
+                    <li class="row" draggable="true" style="position: relative;">
+                        <div class="announcement">
+                            <button type="button" title="Add Row" class="add-row" onclick="addRow(this.parentElement.parentElement)" tabindex="-1">+</button>
+                            {{announcementField.bold}}
+                            {{announcementField.text}}
+                        </div>
+                        <button type="button" title="Delete Row" class="delete-row" onclick="deleteRow(this.parentElement)" tabindex="-1">✖</button>
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+    <div class="page" id="page2">
+        <div id="prayers">
+            <header>代禱事項 Prayers:</header>
+            <ul>
+                {% for field in backPage["prayers"].prayers %}
+                    <li class="row" draggable="true" style="position: relative;">
+                        <button type="button" title="Add Row" class="add-row" onclick="addRow(this.parentElement)" tabindex="-1">+</button>
+                        {{ field }}
+                        <button type="button" title="Delete Row" class="delete-row" onclick="deleteRow(this.parentElement)" tabindex="-1">✖</button>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div id="schedules">
+            <header>事奉人員 Schedules</header>
+            <table>
+                <tr class="title">
+                    <th></th>
+                    <th class="date1" draggable="true" style="border-left: 1px solid; border-right: 1px solid">Date 1</th>
+                    <th class="date2" draggable="true" style="border-left: 1px solid; border-right: 1px solid">Date 2</th>
+                </tr>
+                {% for schedule,job in backPage["schedules"].schedules|zip(backPage["jobs"]) %}
+                    <tr class="row-{{loop.index0}}">
+                        <th>{{ job }}</th>
+                        <td class="col-0"><span>{{ schedule.week1 }}</span></td>
+                        <td class="col-1"><span>{{ schedule.week2 }}</span></td>
+                        {% if schedule.errors %}
+                            <td>
+                                {% for error in schedule.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div id="scriptures">
+            <header>本週金句 Scriptures</header>
+                {{ backPage["scriptures"].book }}
+                {{ backPage["scriptures"].chapter }}
+                {{ backPage["scriptures"].verses }}
+        </div>
+
+        <div id="last_box">
+            <header>經文回想 Scripture Recall</header>
+                {{ backPage["last_box"].box }}
+        </div>
+    </div>
+
+    <div class="nextPrev">
+        <button type="button" title="Previous Page" class="prevBtn" onclick="nextPrev(-1)" style="visibility: hidden;">Prev</button>
+        <button type="button" title="Next Page" class="nextBtn" onclick="nextPrev(1)">Next</button>
+    </div>
+    <div class="steps">
+        <span class="step" title="Page 1" onclick=showPage(0)></span>
+        <span class="step" title="Page 2" onclick=showPage(1)></span>
+        <span class="step" title="Page 3" onclick=showPage(2)></span>
+    </div>
+
+</form>
+</body>
+</html>
