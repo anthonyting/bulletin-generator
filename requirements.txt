@@ -2,5 +2,5 @@ Flask==2.3.2
 Flask-WTF==0.14.2
 python-docx==0.8.10
 gunicorn==19.9.0
-requests==2.22.0
+requests==2.31.0
 beautifulsoup4==4.7.1
